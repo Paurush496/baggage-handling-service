@@ -13,6 +13,9 @@ import com.flight.baggagehandlerservice.model.BaggageFlightInfo;
 import com.flight.baggagehandlerservice.model.CheckInBaggage;
 import com.flight.baggagehandlerservice.service.BaggageHandlerService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping(path = "/bhs")
 @CrossOrigin("*")
@@ -26,6 +29,7 @@ public class BHSController {
 
 	@PostMapping(path = "/check-in-baggage")
 	public ResponseEntity<List<BaggageFlightInfo>> checkInBaggage(@RequestBody List<CheckInBaggage> baggages) {
+		log.info("Request received for Baggages Check-in");
 		List<BaggageFlightInfo> checkedInBaggagesWithFlightInfo = baggageHandlerService
 				.validateAndCheckInBaggages(baggages);
 		return checkedInBaggagesWithFlightInfo != null && !checkedInBaggagesWithFlightInfo.isEmpty()

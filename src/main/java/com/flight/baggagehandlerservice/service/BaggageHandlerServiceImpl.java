@@ -17,6 +17,9 @@ import com.flight.baggagehandlerservice.model.FlightSchedule;
 import com.flight.baggagehandlerservice.provider.AirlineProvider;
 import com.flight.baggagehandlerservice.repository.CheckedInBaggageRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class BaggageHandlerServiceImpl implements BaggageHandlerService {
 
@@ -52,8 +55,8 @@ public class BaggageHandlerServiceImpl implements BaggageHandlerService {
 			FlightSchedule flightInfo = allFlights.getFlightsScheduled().stream()
 					.filter(flight -> codeIATA.equalsIgnoreCase(flight.getCarrier().getCodeIATA())
 							&& flightNo == flight.getFlightNumber())
-					.findFirst()
-					.orElseThrow(() -> new NoSuchElementException("No Flights scheduled with given APC tag"));
+					.findFirst().orElseThrow(() -> new NoSuchElementException(
+							"No Flights scheduled with given APC tag " + bag.getBagAPC()));
 
 			String airlineName = airlineProvider.getNameFromIATAAndICAOCode(flightInfo.getCarrier());
 			String flight = codeIATA.concat("-" + flightNo);
@@ -69,7 +72,9 @@ public class BaggageHandlerServiceImpl implements BaggageHandlerService {
 			checkedInBaggage.setFlight(flight);
 			checkedInBaggage.setDepartureTime(flightInfo.getDepartureTime());
 			checkedInBaggage.setLogoUrl(airlineProvider.getLogoUrlFromIATAAndICAOCode(flightInfo.getCarrier()));
-			baggageRepository.saveAndFlush(checkedInBaggage);
+			baggageRepository.save(checkedInBaggage);
+
+			log.info("Bag {} checked in for flight {}", bag.getBagUId(), flight);
 
 			BaggageFlightInfo baggageFlightInfo = new BaggageFlightInfo();
 			baggageFlightInfo.setBagUId(bag.getBagUId());
