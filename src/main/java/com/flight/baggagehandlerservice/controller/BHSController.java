@@ -17,7 +17,7 @@ import com.flight.baggagehandlerservice.service.BaggageHandlerService;
 
 @RestController
 @RequestMapping(path = "/bhs")
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 public class BHSController {
 
 	private final BaggageHandlerService baggageHandlerService;
