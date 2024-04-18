@@ -15,7 +15,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint("/ws").setAllowedOriginPatterns("https://baggage-handler-service-ui*.herokuapp.com")
-//				.setAllowedOrigins("*")
 				.withSockJS();
 	}
 

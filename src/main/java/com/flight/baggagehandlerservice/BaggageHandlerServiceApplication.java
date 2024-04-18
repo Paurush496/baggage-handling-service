@@ -14,7 +14,7 @@ public class BaggageHandlerServiceApplication {
 
 	@PostConstruct
 	public void init() {
-		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kolkata"));
+		TimeZone.setDefault(TimeZone.getTimeZone("IST"));
 	}
 
 	public static void main(String[] args) {
