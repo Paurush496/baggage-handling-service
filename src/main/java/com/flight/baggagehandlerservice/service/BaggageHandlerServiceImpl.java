@@ -68,6 +68,7 @@ public class BaggageHandlerServiceImpl implements BaggageHandlerService {
 			checkedInBaggage.setAirline(airlineName);
 			checkedInBaggage.setFlight(flight);
 			checkedInBaggage.setDepartureTime(flightInfo.getDepartureTime());
+			checkedInBaggage.setLogoUrl(airlineProvider.getLogoUrlFromIATAAndICAOCode(flightInfo.getCarrier()));
 			baggageRepository.saveAndFlush(checkedInBaggage);
 
 			BaggageFlightInfo baggageFlightInfo = new BaggageFlightInfo();

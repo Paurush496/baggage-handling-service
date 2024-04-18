@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -21,4 +22,9 @@ public class DatabaseConfig {
 		config.setJdbcUrl(dbUrl);
 		return new HikariDataSource(config);
 	}
-}	
+
+	@Bean
+	JdbcTemplate jdbcTemplate() {
+		return new JdbcTemplate(dataSource());
+	}
+}

@@ -7,5 +7,4 @@ import com.flight.baggagehandlerservice.entity.CheckedInBaggage;
 
 @Repository
 public interface CheckedInBaggageRepository extends JpaRepository<CheckedInBaggage, Long> {
-
 }
