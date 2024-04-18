@@ -15,7 +15,7 @@ import com.flight.baggagehandlerservice.model.CheckedInBagsFlights;
 public class CheckInBaggageDatabaseListenerService {
 
 	private final String fetchCheckedInBagsFlights = "SELECT COUNT(*) as \"bagsCount\", airline, flight, airline_logo_url as \"airlinesLogo\", "
-			+ "departure FROM checked_in_baggage GROUP BY airline, flight, departure, airline_logo_url HAVING departure < CURRENT_TIMESTAMP";
+			+ "departure FROM checked_in_baggage GROUP BY airline, flight, departure, airline_logo_url HAVING departure > CURRENT_TIMESTAMP";
 
 	private final JdbcTemplate jdbcTemplate;
 	private final SimpMessagingTemplate messagingTemplate;
